@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Telegram Mini App Starter
+
+A simple Telegram Mini App built with Next.js that displays user information from Telegram, including:
+- **Username** - The user's Telegram username
+- **Telegram ID** - The user's unique Telegram ID  
+- **Date Joined** - The date when the user first opened the mini app (stored in localStorage)
+
+## Features
+
+✨ **Telegram Authentication** - Automatically authenticates users through Telegram Mini Apps SDK  
+💾 **Persistent Storage** - Tracks first join date using browser localStorage (no backend required)  
+🎨 **Beautiful UI** - Modern gradient design with dark mode support  
+📱 **Mobile Optimized** - Native-feeling experience in Telegram
 
 ## Getting Started
 
-First, run the development server:
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+### 2. Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Set Up Telegram Bot
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Create a bot using [@BotFather](https://t.me/botfather) on Telegram
+2. Get your bot token
+3. Use [@BotFather](https://t.me/botfather) to set up a Mini App:
+   - Send `/newapp` to BotFather
+   - Select your bot
+   - Provide app title, description, and photo
+   - Set the Web App URL to your deployment URL (or use a tunnel like ngrok for local testing)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Deploy Your App
+
+Deploy to Vercel, Netlify, or any hosting platform that supports Next.js:
+
+**Vercel (Recommended):**
+```bash
+npm run build
+```
+
+Then deploy using the [Vercel Platform](https://vercel.com/new).
+
+**Or use Vercel CLI:**
+```bash
+npm i -g vercel
+vercel
+```
+
+### 5. Update Bot Settings
+
+Once deployed, update your bot's Mini App URL in BotFather with your production URL.
+
+## Testing Locally
+
+To test locally, you'll need to expose your local server to the internet:
+
+1. Install ngrok: `npm install -g ngrok`
+2. Run your dev server: `npm run dev`
+3. In another terminal: `ngrok http 3000`
+4. Use the ngrok HTTPS URL in BotFather for your Mini App
+
+## How It Works
+
+- The app uses the [@telegram-apps/sdk](https://www.npmjs.com/package/@telegram-apps/sdk) to authenticate users
+- When a user opens the mini app, their Telegram data (username, ID) is automatically retrieved
+- The first time a user opens the app, the current date is saved to localStorage
+- On subsequent visits, the original join date is displayed
+
+## Project Structure
+
+```
+src/
+  app/
+    page.tsx        # Main app component with Telegram auth logic
+    layout.tsx      # Root layout
+    globals.css     # Global styles
+```
+
+## Technologies Used
+
+- **Next.js 15** - React framework
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **Telegram Mini Apps SDK** - Authentication
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Telegram Mini Apps Documentation](https://core.telegram.org/bots/webapps)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [@telegram-apps/sdk](https://docs.telegram-mini-apps.com/)
