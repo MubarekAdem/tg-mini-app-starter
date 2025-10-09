@@ -1,6 +1,6 @@
 # Telegram Mini App Starter
 
-A simple Telegram Mini App built with Next.js that displays user information from Telegram, including:
+A simple Telegram Mini App built with Next.js that displays user information from Telegram Authentication, including:
 - **Username** - The user's Telegram username
 - **Telegram ID** - The user's unique Telegram ID  
 - **Date Joined** - The date when the user first opened the mini app (stored in localStorage)
