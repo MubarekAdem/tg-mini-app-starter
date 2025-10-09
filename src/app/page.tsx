@@ -1,7 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { initData, initSwipeBehavior, init as initSDK } from '@telegram-apps/sdk';
+import { 
+  retrieveLaunchParams, 
+  swipeBehavior, 
+  init as initSDK,
+  type LaunchParams 
+} from '@telegram-apps/sdk';
 
 interface UserData {
   username?: string;
@@ -21,20 +26,24 @@ export default function Home() {
       // Initialize Telegram Mini App SDK
       initSDK();
       
-      // Initialize swipe behavior (optional, makes the app feel more native)
-      const [swipeBehavior] = initSwipeBehavior();
-      swipeBehavior.disableVerticalSwipe();
+      // Mount swipe behavior and disable vertical swipes (optional, makes the app feel more native)
+      if (swipeBehavior.mount.isAvailable()) {
+        swipeBehavior.mount();
+        if (swipeBehavior.disableVertical.isAvailable()) {
+          swipeBehavior.disableVertical();
+        }
+      }
 
-      // Get init data (contains user info)
-      const [initDataResult] = initData();
+      // Get launch params (contains user info)
+      const launchParams: LaunchParams = retrieveLaunchParams();
       
-      if (initDataResult && initDataResult.user) {
-        const user = initDataResult.user;
+      if (launchParams.tgWebAppData && launchParams.tgWebAppData.user) {
+        const user = launchParams.tgWebAppData.user;
         setUserData({
           username: user.username,
           id: user.id,
-          firstName: user.firstName,
-          lastName: user.lastName,
+          firstName: user.first_name,
+          lastName: user.last_name,
         });
 
         // Check localStorage for date joined
