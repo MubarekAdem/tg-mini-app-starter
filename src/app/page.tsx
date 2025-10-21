@@ -20,6 +20,7 @@ export default function Home() {
   const [error, setError] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
   const [count, setCount] = useState(0);
+  const [dateJoined, setDateJoined] = useState<string>('');
 
   useEffect(() => {
     try {
@@ -45,6 +46,21 @@ export default function Home() {
           firstName: user.first_name,
           lastName: user.last_name,
         });
+
+        // Check localStorage for date joined
+        const storedDate = localStorage.getItem('telegram_mini_app_date_joined');
+        if (storedDate) {
+          setDateJoined(storedDate);
+        } else {
+          // First time user - store current date
+          const currentDate = new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          });
+          localStorage.setItem('telegram_mini_app_date_joined', currentDate);
+          setDateJoined(currentDate);
+        }
       } else {
         setError('Unable to get user data from Telegram');
       }
@@ -88,6 +104,7 @@ export default function Home() {
     <div className="flex flex-col items-center min-h-screen bg-white p-8">
       <div className="text-center mb-auto pt-8">
         <h1 className="text-3xl font-bold text-black mb-2">Hello, {displayName}</h1>
+        <p className="text-sm text-gray-600">Date Joined: {dateJoined}</p>
       </div>
 
       <div className="flex flex-col items-center justify-center flex-1">
