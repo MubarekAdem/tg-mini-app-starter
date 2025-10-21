@@ -12,7 +12,8 @@ A simple Telegram Mini App built with Next.js that displays user information fro
 🎨 **Beautiful UI** - Modern gradient design with dark mode support  
 📱 **Mobile Optimized** - Native-feeling experience in Telegram
 
-<img width="471" height="736" alt="image" src="https://github.com/user-attachments/assets/655bfb00-77bf-4bc7-a316-dae6b89b9f56" />
+<img width="200" height="650" alt="image" src="https://github.com/user-attachments/assets/e318192d-2bd7-4961-8b34-ca7cbe691927" />
+
 
 
 ## Getting Started
